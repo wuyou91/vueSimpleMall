@@ -18,6 +18,7 @@ export default {
   name: 'Foot',
   data () {
     return {
+      isLogin: false,
       navTitle: ['首页', '分类', '购物车', '我的'],
       primClass: ['icon-shouye', 'icon-leimu', 'icon-gouwuche', 'icon-yonghu'],
       activeClass: ['icon-shouyefill', 'icon-leimu', 'icon-gouwuchefill', 'icon-yonghufill'],
@@ -28,7 +29,11 @@ export default {
   methods: {
     isActived (index) {
       this.num = index
-      this.$router.push(this.rout[index])
+      if (index === 3) {
+        this.isLogin ? this.$router.push(this.rout[index]) : this.$router.push('/login')
+      } else {
+        this.$router.push(this.rout[index])
+      }
     }
   },
   created () {
@@ -60,10 +65,10 @@ export default {
         color: #0067b1;
       }
       i{
-        font-size: .24rem;
+        font-size: .4rem;
       }
       div{
-        font-size: .12rem;
+        font-size: .24rem;
       }
     }
   }

@@ -5,6 +5,7 @@ const Home = r => require.ensure([], () => r(require('@/pages/home/Home')), 'Hom
 const Category = r => require.ensure([], () => r(require('@/pages/category/Category')), 'Category')
 const Car = r => require.ensure([], () => r(require('@/pages/car/Car')), 'Car')
 const User = r => require.ensure([], () => r(require('@/pages/user/User')), 'User')
+const Login = r => require.ensure([], () => r(require('@/pages/login/Login')), 'Login')
 
 Vue.use(Router)
 
@@ -33,6 +34,11 @@ export default new Router({
       path: '/user',
       name: 'User',
       component: User
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: Login
     }
   ]
 })

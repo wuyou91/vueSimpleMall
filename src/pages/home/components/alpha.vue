@@ -13,23 +13,23 @@
       </div>
       <div class="prod-box">
         <div class="prod">
-          <img src="./../../../../static/images/alpha_01.jpg" alt="">
+          <img src="./../../../../static/images/alpha_02.jpg" alt="">
           <div class="prod-title">Alpha2</div>
           <div class="prod-price"><span>￥</span>12999.00</div>
         </div>
       </div>
       <div class="prod-box">
         <div class="prod">
-          <img src="./../../../../static/images/alpha_01.jpg" alt="">
-          <div class="prod-title"></div>
-          <div class="prod-price"></div>
+          <img src="./../../../../static/images/alpha_03.jpg" alt="">
+          <div class="prod-title">Qrobot</div>
+          <div class="prod-price">即将上市</div>
         </div>
       </div>
       <div class="prod-box">
         <div class="prod">
-          <img src="./../../../../static/images/alpha_01.jpg" alt="">
-          <div class="prod-title"></div>
-          <div class="prod-price"></div>
+          <img src="./../../../../static/images/alpha_04.jpg" alt="">
+          <div class="prod-title">Alpha 1s</div>
+          <div class="prod-price"><span>￥</span>3699.00</div>
         </div>
       </div>
     </div>
@@ -45,6 +45,7 @@ export default {
 <style lang="scss" scoped>
 .alpha {
   width: 100%;
+  margin-bottom: .6rem;
   .title{
     font-size: .12rem;
     color: #515151;

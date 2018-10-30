@@ -246,7 +246,7 @@ export default {
   ul{
     li{
       padding: .15rem 0;
-      font-size: .14rem;
+      font-size: .24rem;
       color: $title_color;
       text-align: center;
     }
@@ -272,7 +272,7 @@ export default {
     p{
       display: block;
       margin-bottom: .05rem;
-      font-size: .14rem;
+      font-size: .28  rem;
       font-weight: bold;
       color: #000;
     }
@@ -285,7 +285,7 @@ export default {
         padding: .05rem;
         div{
           p{
-            font-size: .12rem;
+            font-size: .24rem;
             text-align: center;
             color: #888;
           }
