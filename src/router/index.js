@@ -6,6 +6,7 @@ const Category = r => require.ensure([], () => r(require('@/pages/category/Categ
 const Car = r => require.ensure([], () => r(require('@/pages/car/Car')), 'Car')
 const User = r => require.ensure([], () => r(require('@/pages/user/User')), 'User')
 const Login = r => require.ensure([], () => r(require('@/pages/login/Login')), 'Login')
+const ProductDetail = r => require.ensure([], () => r(require('@/pages/productdetail/ProductDetail')), 'ProductDetail')
 
 Vue.use(Router)
 
@@ -39,6 +40,11 @@ export default new Router({
       path: '/login',
       name: 'Login',
       component: Login
+    },
+    {
+      path: '/productdetail',
+      name: 'ProductDetail',
+      component: ProductDetail
     }
   ]
 })
