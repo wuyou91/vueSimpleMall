@@ -11,6 +11,7 @@ const ProductDetail = r => require.ensure([], () => r(require('@/pages/productde
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
