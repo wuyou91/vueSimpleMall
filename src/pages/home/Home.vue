@@ -4,23 +4,27 @@
     <div id="content">
       <products v-for = "item in products" :key = "item.id" :productItem="item"></products>
     </div>
+    <foot :footNavActiveClass = "footNavActiveClass"></foot>
   </div>
 </template>
 
 <script>
+import foot from '@/pages/common/Foot'
 import banner from './components/banner'
 import products from './components/products'
 import axios from 'axios'
 export default {
   name: 'Home',
   components: {
+    foot,
     banner,
     products
   },
   data () {
     return {
       banner: [],
-      products: []
+      products: [],
+      footNavActiveClass: 'icon-shouyefill'
     }
   },
   methods: {
@@ -37,8 +41,11 @@ export default {
 }
 </script>
 
-<style scoped>
-#content{
-  margin: .2rem .2rem 1rem .2rem;
+<style lang="scss" scoped>
+#home{
+  background-color: $main_bg_color;
+  #content{
+    margin: .2rem .2rem 1rem .2rem;
+  }
 }
 </style>

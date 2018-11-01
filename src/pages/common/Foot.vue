@@ -1,13 +1,14 @@
 <template>
   <div id="foot">
     <ul>
-      <li v-for="(item, index) in navTitle"
-      @click="isActived(index)"
-      :key="index"
-      :class="{active: index===num}">
+      <li v-for="item in nav"
+      @click="changeRouter(item.router)"
+      :key="item.router"
+      :class="{active: item.activeClass === footNavActiveClass}">
         <i class="iconfont"
-        :class="index===num?activeClass[index]:primClass[index]"></i>
-        <div>{{item}}</div>
+        :class="item.activeClass === footNavActiveClass ? item.activeClass : item.primClass"
+        ></i>
+        <div>{{item.navTitle}}</div>
       </li>
     </ul>
   </div>
@@ -16,37 +17,41 @@
 <script>
 export default {
   name: 'Foot',
+  props: {
+    footNavActiveClass: String
+  },
   data () {
     return {
       isLogin: false,
-      navTitle: ['首页', '分类', '购物车', '我的'],
-      primClass: ['icon-shouye', 'icon-leimu', 'icon-gouwuche', 'icon-yonghu'],
-      activeClass: ['icon-shouyefill', 'icon-leimu', 'icon-gouwuchefill', 'icon-yonghufill'],
-      rout: ['home', 'category', 'car', 'user'],
-      num: 0
+      nav: [
+        {navTitle: '首页', primClass: 'icon-shouye', activeClass: 'icon-shouyefill', router: 'home'},
+        {navTitle: '分类', primClass: 'icon-leimu', activeClass: 'icon-leimu', router: 'category'},
+        {navTitle: '购物车', primClass: 'icon-gouwuche', activeClass: 'icon-gouwuchefill', router: 'car'},
+        {navTitle: '我的', primClass: 'icon-yonghu', activeClass: 'icon-yonghufill', router: 'user'}
+      ]
+      // selectedRouter: 'home'
     }
   },
   methods: {
-    isActived (index) {
-      this.num = index
-      if (index === 3) {
-        this.isLogin ? this.$router.push(this.rout[index]) : this.$router.push('/login')
-      } else {
-        this.$router.push(this.rout[index])
-      }
+    changeRouter (router) {
+      // this.selectedRouter = router
+      // if (router === 'user') {
+      //   this.isLogin ? this.$router.push(router) : this.$router.push('/login')
+      // } else {
+      this.$router.push(router)
+      // }
     }
-  },
-  created () {
-    this.num = Number(sessionStorage.getItem('isTab')) // 读取sessionStorage中的数据并赋值给num，以保持之前的选择状态
-    window.addEventListener('beforeunload', () => {
-      sessionStorage.setItem('isTab', this.num) // 刷新页面时将选项卡选中的数据储存在sessionStorage中，用于刷新后保持原来状态，不能用localStorage，因为关闭页面需要清除数据。
-    })
   }
+  // created () {
+  //   this.selectedRouter = sessionStorage.getItem('selected') // 读取sessionStorage中的数据并赋值给num，以保持之前的选择状态
+  //   window.addEventListener('beforeunload', () => {
+  //     sessionStorage.setItem('selected', this.selectedRouter) // 刷新页面时将选项卡选中的数据储存在sessionStorage中，用于刷新后保持原来状态，不能用localStorage，因为关闭页面需要清除数据。
+  //   })
+  // }
 }
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/style/base.scss';
 #foot{
   position: fixed;
   bottom: 0;
@@ -54,6 +59,8 @@ export default {
   right: 0;
   width:100%;
   background: #fff;
+  box-shadow: 0 -1px 4px 0 rgba(0, 0, 0, .2);
+
   ul{
     padding: 0.05rem 0;
     display: flex;

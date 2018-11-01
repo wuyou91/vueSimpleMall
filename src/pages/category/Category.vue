@@ -23,14 +23,20 @@
           </ul>
         </div>
       </div>
+      <foot :footNavActiveClass = "footNavActiveClass"></foot>
   </div>
 </template>
 
 <script>
+import foot from '@/pages/common/Foot'
 export default {
   name: 'Category',
+  components: {
+    foot
+  },
   data () {
     return {
+      footNavActiveClass: 'icon-leimu',
       isTab: 0,
       navData: ['家用电器', '电脑办公', '美妆护肤', '个户清洁', '汽车用品', '图书音像', '男装', '男鞋', '女装', '女鞋', '母婴童装', '运动户外', '食品生鲜', '酒水饮料', '家具家装', '家居厨具', '箱包手袋', '钟表珠宝', '玩具乐器', '宠物生活', '礼品鲜花', '生活旅行', '艺术邮币', '二手商品', '国际品牌', '拍卖'],
       list1: {

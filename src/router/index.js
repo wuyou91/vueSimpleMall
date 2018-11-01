@@ -10,7 +10,7 @@ const ProductDetail = r => require.ensure([], () => r(require('@/pages/productde
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   routes: [
     {
@@ -49,3 +49,12 @@ export default new Router({
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  if (to.name !== 'Login' && to.name === 'User') {
+    router.push({name: 'Login'})
+  }
+  next()
+})
+
+export default router
