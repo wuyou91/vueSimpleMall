@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+Vue.use(Router)
 
 const Home = r => require.ensure([], () => r(require('@/pages/home/Home')), 'Home')
 const Category = r => require.ensure([], () => r(require('@/pages/category/Category')), 'Category')
@@ -7,8 +8,7 @@ const Car = r => require.ensure([], () => r(require('@/pages/car/Car')), 'Car')
 const User = r => require.ensure([], () => r(require('@/pages/user/User')), 'User')
 const Login = r => require.ensure([], () => r(require('@/pages/login/Login')), 'Login')
 const ProductDetail = r => require.ensure([], () => r(require('@/pages/productdetail/ProductDetail')), 'ProductDetail')
-
-Vue.use(Router)
+const register = r => require.ensure([], () => r(require('@/pages/login/components/register')), 'register')
 
 const router = new Router({
   mode: 'history',
@@ -46,6 +46,11 @@ const router = new Router({
       path: '/productdetail',
       name: 'ProductDetail',
       component: ProductDetail
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: register
     }
   ]
 })

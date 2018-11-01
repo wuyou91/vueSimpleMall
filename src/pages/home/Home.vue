@@ -43,7 +43,7 @@ export default {
 
 <style lang="scss" scoped>
 #home{
-  background-color: $main_bg_color;
+  background-color: $main-bg-color;
   #content{
     margin: .2rem .2rem 1rem .2rem;
   }

@@ -248,7 +248,7 @@ export default {
   width: 25%;
   overflow-y: auto;
   box-sizing: border-box;
-  background-color: $main_bg_color;
+  background-color: $main-bg-color;
   ul{
     li{
       padding: .15rem 0;
