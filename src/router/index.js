@@ -57,7 +57,11 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
   if (to.name !== 'Login' && to.name === 'User') {
-    router.push({name: 'Login'})
+    if (sessionStorage.getItem('hasLogin') === '1') {
+      next()
+    } else {
+      router.push({name: 'Login'})
+    }
   }
   next()
 })
