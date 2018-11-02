@@ -36,7 +36,7 @@ export default {
   methods: {
     logIn () {
       let userData = JSON.parse(sessionStorage.getItem('userData'))
-      if (this.formData.name !== userData.name) {
+      if (userData === null || this.formData.name !== userData.name) {
         this.tips = {}
         this.tips.name = '用户名不存在'
       } else if (this.formData.password !== userData.password) {
