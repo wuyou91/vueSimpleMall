@@ -30,12 +30,26 @@ const router = new Router({
     {
       path: '/car',
       name: 'Car',
-      component: Car
+      component: Car,
+      beforeEnter: (to, from, next) => {
+        if (sessionStorage.getItem('hasLogin') === '1') {
+          next()
+        } else {
+          router.push({name: 'Login'})
+        }
+      }
     },
     {
       path: '/user',
       name: 'User',
-      component: User
+      component: User,
+      beforeEnter: (to, from, next) => {
+        if (sessionStorage.getItem('hasLogin') === '1') {
+          next()
+        } else {
+          router.push({name: 'Login'})
+        }
+      }
     },
     {
       path: '/login',
@@ -50,20 +64,16 @@ const router = new Router({
     {
       path: '/register',
       name: 'register',
-      component: register
+      component: register,
+      beforeEnter: (to, from, next) => {
+        if (sessionStorage.getItem('hasLogin') === '1') {
+          router.push({name: 'Home'})
+        } else {
+          next()
+        }
+      }
     }
   ]
-})
-
-router.beforeEach((to, from, next) => {
-  if (to.name !== 'Login' && to.name === 'User') {
-    if (sessionStorage.getItem('hasLogin') === '1') {
-      next()
-    } else {
-      router.push({name: 'Login'})
-    }
-  }
-  next()
 })
 
 export default router

@@ -45,7 +45,8 @@ export default {
       } else {
         this.tips = {}
         sessionStorage.setItem('hasLogin', '1')
-        this.$router.push('/user')
+        // this.$router.push('/user')
+        this.$router.go(-1)
       }
     }
   }

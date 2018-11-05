@@ -34,20 +34,9 @@ export default {
   },
   methods: {
     changeRouter (router) {
-      // this.selectedRouter = router
-      // if (router === 'user') {
-      //   this.isLogin ? this.$router.push(router) : this.$router.push('/login')
-      // } else {
       this.$router.push(router)
-      // }
     }
   }
-  // created () {
-  //   this.selectedRouter = sessionStorage.getItem('selected') // 读取sessionStorage中的数据并赋值给num，以保持之前的选择状态
-  //   window.addEventListener('beforeunload', () => {
-  //     sessionStorage.setItem('selected', this.selectedRouter) // 刷新页面时将选项卡选中的数据储存在sessionStorage中，用于刷新后保持原来状态，不能用localStorage，因为关闭页面需要清除数据。
-  //   })
-  // }
 }
 </script>
 

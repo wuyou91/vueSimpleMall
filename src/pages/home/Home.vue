@@ -1,5 +1,6 @@
 <template>
   <div id="home">
+    <top-bar></top-bar>
     <banner :banner = "banner"></banner>
     <div id="content">
       <products v-for = "item in products" :key = "item.id" :productItem="item"></products>
@@ -9,6 +10,7 @@
 </template>
 
 <script>
+import topBar from '@/pages/common/TopBar'
 import foot from '@/pages/common/Foot'
 import banner from './components/banner'
 import products from './components/products'
@@ -16,6 +18,7 @@ import axios from 'axios'
 export default {
   name: 'Home',
   components: {
+    topBar,
     foot,
     banner,
     products
