@@ -2,7 +2,7 @@
   <div class="product">
     <div class="title">{{productItem.title}}</div>
     <!-- 区块广告 -->
-    <div class="ad"><img :src="productItem.titleImage"></div>
+    <div class="ad"><img v-lazy="productItem.titleImage"></div>
     <div class="prod-content">
       <div class="prod-box"
         v-for = "item in productItem.content"
@@ -10,7 +10,7 @@
         @click = "goProductDetails(item.productId)"
         >
         <div class="prod">
-          <img :src="item.images">
+          <img v-lazy="item.images">
           <div class="prod-title">{{item.title}}</div>
           <div class="prod-price"><span>￥</span>{{item.price}}</div>
         </div>
