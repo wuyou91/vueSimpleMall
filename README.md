@@ -1,16 +1,26 @@
 # shop-vue
 一个vue.js的简单商城
 
-数据用的mockjs生成的随机数据
+## 数据接口
+数据由mockjs搭配json-server生成随机数据模拟后台接口
 
-* npm install 安装依赖
+## 登录与注册
+登录与注册采用sessionStorage存储用户信息，验证时直接从sessionStorage取出数据验证。
+~~~
+sessionStorage.setItem('userData', userinfo) // 储存用户注册信息
 
-* npm run mock 开启mock服务器
+sessionStorage.setItem('hasLogin', '1') // 登录设置为'1'，退出登录设置为'0'
+~~~
 
-* npm run dev 运行开发环境
+## 用到的插件
+* 首页轮播 [vue-awesome-swiper](https://github.com/surmon-china/vue-awesome-swiper)  
+* 图片懒加载 [vue-lazyload](https://github.com/hilongjw/vue-lazyload)
 
-* npm run build 打包生产环境文件
-项目结构
+## 主要功能实现
+* axio获取接口数据，插入模板
+* 路由验证，未登录点击购物车和个人中心跳转到登录页面
+
+## 项目结构
 ~~~
 ├─build
 ├─config
@@ -35,3 +45,11 @@
     │  └─categories
     └─lib 
 ~~~
+
+* npm install 安装依赖
+
+* npm run mock 开启mock服务器
+
+* npm run dev 运行开发环境
+
+* npm run build 打包生产环境文件
