@@ -7,7 +7,7 @@
       <div class="prod-box"
         v-for = "item in productItem.content"
         :key = "item.id"
-        @click = "goProductDetails(item.productId)"
+        @click = "goProductDetails(item.id)"
         >
         <div class="prod">
           <img v-lazy="item.images">
@@ -27,12 +27,16 @@ export default {
   },
   methods: {
     goProductDetails (productId) {
-      this.$router.push(`ProductDetail?pd=${productId}`)
+      this.$router.push({
+        name: 'ProductDetail',
+        query: {
+          pid: productId
+        }
+      })
     }
   }
 }
 </script>
-
 <style lang="scss" scoped>
 .product {
   width: 100%;

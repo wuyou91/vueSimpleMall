@@ -1,33 +1,32 @@
 <template>
   <div class="product-detail">
     <div class="detail-gallery">
-        <swiper :options="swiperOption">
-          <swiper-slide v-for="item in img" :key="item">
-            <img :src="'static/images/mock/' + item + '.jpg'" class="swiperImg">
-          </swiper-slide>
-          <div class="swiper-pagination" slot="pagination"></div>
-        </swiper>
-      </div>
+      <swiper :options="swiperOption">
+        <swiper-slide v-for="(item,index) in detail.imginfo" :key="index">
+          <img :src="item" class="swiperImg">
+        </swiper-slide>
+        <div class="swiper-pagination" slot="pagination"></div>
+      </swiper>
+    </div>
     <div class="detail-head">
       <div class="price">
         <div class="price-now">
-          ￥<span>60.00</span>
+          ￥<span>{{detail.price}}</span>
         </div>
         <div class="price-original">
           双11狂欢价 499
         </div>
       </div>
-      <div class="title">触碰传感器</div>
-      <div class="desc">安装红外传感器实现产品功能增加及体验优化</div>
+      <div class="title">{{detail.title}}</div>
+      <div class="desc">{{detail.desc}}</div>
       <div class="tips">
-        *触碰传感器是针对物体的碰撞或者按压产生的数据反馈到主控端，从而进行编程，实现不同的功能
+        *{{detail.tips}}
       </div>
       <ul>
-        <li>7天无理由退货</li>
-        <li>15天免费换货</li>
-        <li>1年保修</li>
-        <li>积分计划</li>
-        <li>满100元包邮</li>
+        <li v-for="(item,index) in detail.server" :key="index">
+          <i class="iconfont" :class="item.iconName"></i>
+          {{item.text}}
+        </li>
       </ul>
     </div>
     <div class="detail-content">
@@ -38,27 +37,24 @@
         </div>
       </div>
       <div class="detail-content-info">
-        <transition name="slideLeft">
-          <div class="info-img" v-show="tap">
-            <img v-for="item in img" src="static/images/mock/01.jpg" :key="item">
-          </div>
-        </transition>
-        <transition name="slideRight">
-          <div class="info-detail" v-show="!tap">
-            <ul>
-              <li v-for="item in detail" :key = item.name>
-                <div>{{item.name}}</div>
-                <div>{{item.val}}</div>
-              </li>
-            </ul>
-          </div>
-        </transition>
+        <div class="info-img" v-show="tap">
+          <img v-for="(item, index) in detail.imginfo" :src="item" :key="index">
+        </div>
+        <div class="info-detail" v-show="!tap">
+          <ul>
+            <li v-for="item in detail.parameter" :key = item.name>
+              <div>{{item.name}}</div>
+              <div>{{item.val}}</div>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'ProductDetail',
   data () {
@@ -72,48 +68,23 @@ export default {
           el: '.swiper-pagination'
         }
       },
-      img: ['01', '02', '03', '04', '05', '06', '07'],
-      detail: [
-        {
-          name: '功率',
-          val: '≈0.2W'
-        },
-        {
-          name: '工作电压',
-          val: '6.8~9.6V DC'
-        },
-        {
-          name: '按键压力',
-          val: '180g'
-        },
-        {
-          name: '操作方式',
-          val: '按压、单击、双击、长按'
-        },
-        {
-          name: '通信协议',
-          val: '半双工串口通信'
-        },
-        {
-          name: '重量',
-          val: '7.6±0.1g'
-        },
-        {
-          name: '外观尺寸',
-          val: '30mm*30mm*12mm'
-        },
-        {
-          name: '包装清单',
-          val: '触碰传感器  *1；连接线  *1 ；ID贴纸  *1 ；说明书  *1'
-        }
-      ],
+      detail: {},
       tap: true
     }
   },
   methods: {
     handleTap (b) {
       this.tap = b
+    },
+    getDetailData () {
+      axios.get(`http://10.10.3.58:8085/productDetail?pid=${this.$route.query.pid}`).then((r) => {
+        this.detail = r.data[0]
+      })
     }
+
+  },
+  mounted () {
+    this.getDetailData()
   }
 }
 </script>
@@ -168,14 +139,20 @@ export default {
     flex-wrap: wrap;
     padding: .2rem;
     li{
-      font-size: .24rem;
+      font-size: .28rem;
       width: 33.3%;
       box-sizing: border-box;
       text-align: center;
-      margin-bottom: .2rem;
+      margin-bottom: .3rem;
+      color: #666;
       border-right:1px solid #ccc;
       &:nth-child(3n),&:last-child{
         border-right: none;
+      }
+      i{
+        display: block;
+        font-size: .6rem;
+        color: #fd103e;
       }
     }
   }
@@ -215,6 +192,7 @@ export default {
     }
   }
   .info-detail{
+    width: 100%;
     ul{
       padding: .4rem;
       li{
@@ -229,31 +207,5 @@ export default {
       }
     }
   }
-}
-
-.slideLeft-enter-active {
-  transition: all .3s linear;
-}
-.slideLeft-leave-active {
-  transition: all .3s linear;
-}
-.slideLeft-enter{
-  transform: translateX(100%);
-}
-.slideLeft-leave-to{
-  transform: translateX(-100%);
-}
-// slideRight
-.slideRight-enter-active {
-  transition: all .3s linear;
-}
-.slideRight-leave-active {
-  transition: all .3s linear;
-}
-.slideRight-enter{
-  transform: translateX(-100%);
-}
-.slideRight-leave-to{
-  transform: translateX(100%);
 }
 </style>
