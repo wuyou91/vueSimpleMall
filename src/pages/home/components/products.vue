@@ -1,8 +1,8 @@
 <template>
   <div class="product">
-    <div class="title">{{productItem.title}}</div>
+    <div class="title">{{productItem.name}}</div>
     <!-- 区块广告 -->
-    <div class="ad"><img v-lazy="productItem.titleImage"></div>
+    <div class="ad"><img v-lazy="productItem.img"></div>
     <div class="prod-content">
       <div class="prod-box"
         v-for = "item in productItem.content"
@@ -10,9 +10,10 @@
         @click = "goProductDetails(item.id)"
         >
         <div class="prod">
-          <img v-lazy="item.images">
-          <div class="prod-title">{{item.title}}</div>
+          <img v-lazy="item.img">
+          <div class="prod-title">{{item.name}}</div>
           <div class="prod-price"><span>￥</span>{{item.price}}</div>
+          <div class="prod-desc">{{item.desc}}</div>
         </div>
       </div>
     </div>
@@ -42,7 +43,7 @@ export default {
   width: 100%;
   margin-bottom: .12rem;
   .title{
-    font-size: .48rem;
+    font-size: .36rem;
     color: #515151;
     line-height: 1rem;
   }
@@ -71,9 +72,13 @@ export default {
       }
       .prod-title{
         margin: .2rem 0;
-        font-size: .28rem;
+        font-size: .32rem;
+        font-weight: 600;
         color: #333;
         text-align: center;
+        overflow: hidden;
+        text-overflow:ellipsis;
+        white-space: nowrap;
       }
       .prod-price{
         margin: .2rem 0;
@@ -83,6 +88,14 @@ export default {
         span{
           font-size: .24rem;
         }
+      }
+      .prod-desc{
+        font-size: .24rem;
+        color: #888;
+        text-align: center;
+        overflow: hidden;
+        text-overflow:ellipsis;
+        white-space: nowrap;
       }
     }
   }

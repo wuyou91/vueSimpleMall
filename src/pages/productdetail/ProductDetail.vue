@@ -2,7 +2,7 @@
   <div class="product-detail">
     <div class="detail-gallery">
       <swiper :options="swiperOption">
-        <swiper-slide v-for="(item,index) in detail.imginfo" :key="index">
+        <swiper-slide v-for="(item,index) in detail.mainImg" :key="index">
           <img :src="item" class="swiperImg">
         </swiper-slide>
         <div class="swiper-pagination" slot="pagination"></div>
@@ -13,19 +13,15 @@
         <div class="price-now">
           ￥<span>{{detail.price}}</span>
         </div>
-        <div class="price-original">
+        <!-- <div class="price-original">
           双11狂欢价 499
-        </div>
+        </div> -->
       </div>
-      <div class="title">{{detail.title}}</div>
+      <div class="title">{{detail.name}}</div>
       <div class="desc">{{detail.desc}}</div>
-      <div class="tips">
-        *{{detail.tips}}
-      </div>
       <ul>
         <li v-for="(item,index) in detail.server" :key="index">
-          <i class="iconfont" :class="item.iconName"></i>
-          {{item.text}}
+          {{item}}
         </li>
       </ul>
     </div>
@@ -38,7 +34,7 @@
       </div>
       <div class="detail-content-info">
         <div class="info-img" v-show="tap">
-          <img v-for="(item, index) in detail.imginfo" :src="item" :key="index">
+          <img v-for="(item, index) in detail.info" v-lazy="item" :key="index">
         </div>
         <div class="info-detail" v-show="!tap">
           <ul>
@@ -77,7 +73,7 @@ export default {
       this.tap = b
     },
     getDetailData () {
-      axios.get(`http://10.10.3.58:8085/productDetail?pid=${this.$route.query.pid}`).then((r) => {
+      axios.get(`http://10.10.3.58:8085/pageDetail?id=${this.$route.query.pid}`).then((r) => {
         this.detail = r.data[0]
       })
     }
@@ -119,40 +115,28 @@ export default {
   }
   .title{
     padding: 0 .2rem;
-    font-size: .36rem;
+    font-size: .4rem;
   }
   .desc{
     padding: 0 .2rem;
     font-size: .28rem;
     color: #666;
-    margin-bottom: .2rem;
-  }
-  .tips{
-    padding: .2rem;
-    font-size: .28rem;
-    line-height: .42rem;
-    color: #444;
-    background: #feece9;
+    margin: .3rem 0;
   }
   ul{
     display: flex;
     flex-wrap: wrap;
     padding: .2rem;
     li{
-      font-size: .28rem;
-      width: 33.3%;
+      font-size: .24rem;
+      // width: 33.3%;
       box-sizing: border-box;
       text-align: center;
+      margin-right: .4rem;
       margin-bottom: .3rem;
       color: #666;
-      border-right:1px solid #ccc;
       &:nth-child(3n),&:last-child{
-        border-right: none;
-      }
-      i{
-        display: block;
-        font-size: .6rem;
-        color: #fd103e;
+        margin-right: none;
       }
     }
   }

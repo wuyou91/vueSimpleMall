@@ -1,8 +1,8 @@
-const homeData = require('./data/homeData')
-const productDetail = require('./data/productDetail')
+const homeData = require('./data/homeData.json')
+const pageDetail = require('./data/pageDetail.json').data
 
 const DB = {
   homeData,
-  productDetail
+  pageDetail
 }
 module.exports = () => DB

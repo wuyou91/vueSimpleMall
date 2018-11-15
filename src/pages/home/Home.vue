@@ -1,12 +1,14 @@
 <template>
-  <div id="home">
-    <top-bar></top-bar>
-    <banner :banner = "banner"></banner>
-    <div id="content">
-      <products v-for = "item in products" :key = "item.id" :productItem="item"></products>
+  <keep-alive>
+    <div id="home">
+      <top-bar></top-bar>
+      <banner :banner = "banner"></banner>
+      <div id="content">
+        <products v-for = "item in products" :key = "item.id" :productItem="item"></products>
+      </div>
+      <foot :footNavActiveClass = "footNavActiveClass"></foot>
     </div>
-    <foot :footNavActiveClass = "footNavActiveClass"></foot>
-  </div>
+  </keep-alive>
 </template>
 
 <script>
@@ -34,7 +36,7 @@ export default {
     getHomeData () {
       axios.get('http://10.10.3.58:8085/homeData').then((res) => {
         this.banner = res.data.banner
-        this.products = res.data.products
+        this.products = res.data.data
       })
     }
   },
