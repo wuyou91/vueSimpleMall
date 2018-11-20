@@ -1,5 +1,7 @@
 <template>
   <div class="product-detail">
+    <top-bar></top-bar>
+    <shop-bar></shop-bar>
     <div class="detail-gallery">
       <swiper :options="swiperOption">
         <swiper-slide v-for="(item,index) in detail.mainImg" :key="index">
@@ -50,9 +52,15 @@
 </template>
 
 <script>
+import shopBar from './components/shopBar'
+import topBar from './components/topbar'
 import axios from 'axios'
 export default {
   name: 'ProductDetail',
+  components: {
+    shopBar,
+    topBar
+  },
   data () {
     return {
       swiperOption: {
@@ -144,6 +152,7 @@ export default {
 .detail-content{
   width: 100%;
   overflow: hidden;
+  margin-bottom: 1rem;
   .detail-content-title{
     width: 100%;
     background: #fff;

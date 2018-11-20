@@ -2,9 +2,7 @@
   <div class="banner">
     <swiper :options="swiperOption">
         <swiper-slide v-for="(item, index) in banner" :key="index">
-          <a :href="item">
-            <img :src="item" class="swiperImg">
-          </a>
+          <img :src="item" class="swiperImg">
         </swiper-slide>
         <div class="swiper-pagination" slot="pagination"></div>
       </swiper>
