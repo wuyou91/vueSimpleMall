@@ -1,12 +1,22 @@
 <template>
   <div id="app">
     <router-view/>
+    <tab-bar v-if="showTab"></tab-bar>
   </div>
 </template>
 
 <script>
+import TabBar from './pages/common/TabBar'
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    TabBar
+  },
+  computed: {
+    showTab () {
+      return this.$store.state.showtab
+    }
+  }
 }
 </script>
 

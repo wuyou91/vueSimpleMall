@@ -1,21 +1,14 @@
 <template>
   <div id="user">
     用户页面
-    <foot :footNavActiveClass = "footNavActiveClass"></foot>
   </div>
 </template>
 
 <script>
-import foot from '@/pages/common/Foot'
 export default {
   name: 'User',
-  components: {
-    foot
-  },
-  data () {
-    return {
-      footNavActiveClass: 'icon-yonghufill'
-    }
+  mounted () {
+    this.$store.commit('CHANGE_TAB', 'icon-yonghufill')
   }
 }
 </script>

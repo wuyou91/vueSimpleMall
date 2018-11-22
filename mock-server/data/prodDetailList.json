@@ -1,7 +1,5 @@
 {
-  "from": "http://you.163.com/item/list?categoryId=1043000&subCategoryId=1022000",
-  "name": "pageDetail",
-  "data": [
+  "prodDetailList": [
     {
       "id": "1674017",
       "name": "汽车全包围双层定制脚垫",

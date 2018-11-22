@@ -4,6 +4,7 @@
 ## 数据接口
 ~~数据由mockjs搭配json-server生成随机数据模拟后台接口~~  
 node爬取的网易严选的数码产品分类下的数据，没有把图片下载下来，直接使用的是网易严选的图片，若其删除则会造成无法获取到对应的图片。
+mock-server/data文件夹下用来存放各类元数据,通过运行merge.js将数据合并到db.json内，作为服务数据。
 
 ## 登录与注册
 登录与注册采用sessionStorage存储用户信息，验证时直接从sessionStorage取出数据验证。
@@ -55,3 +56,5 @@ sessionStorage.setItem('hasLogin', '1') // 登录设置为'1'，退出登录设�
 * npm run dev 运行开发环境
 
 * npm run build 打包生产环境文件
+
+* npm run data 重新生成合并模拟数据

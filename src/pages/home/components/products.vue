@@ -30,8 +30,8 @@ export default {
     goProductDetails (productId) {
       this.$router.push({
         name: 'ProductDetail',
-        query: {
-          pid: productId
+        params: {
+          id: productId
         }
       })
     }

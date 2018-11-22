@@ -1,19 +1,15 @@
 <template>
-  <keep-alive>
     <div id="home">
       <top-bar></top-bar>
       <banner :banner = "banner"></banner>
       <div id="content">
         <products v-for = "item in products" :key = "item.id" :productItem="item"></products>
       </div>
-      <foot :footNavActiveClass = "footNavActiveClass"></foot>
     </div>
-  </keep-alive>
 </template>
 
 <script>
 import topBar from '@/pages/common/TopBar'
-import foot from '@/pages/common/Foot'
 import banner from './components/banner'
 import products from './components/products'
 import axios from 'axios'
@@ -21,27 +17,28 @@ export default {
   name: 'Home',
   components: {
     topBar,
-    foot,
     banner,
     products
   },
   data () {
     return {
       banner: [],
-      products: [],
-      footNavActiveClass: 'icon-shouyefill'
+      products: []
     }
   },
   methods: {
     getHomeData () {
-      axios.get('http://10.10.3.58:8085/homeData').then((res) => {
-        this.banner = res.data.banner
-        this.products = res.data.data
+      axios.get('http://10.10.3.58:8085/homeBanner').then((res) => {
+        this.banner = res.data
+      })
+      axios.get('http://10.10.3.58:8085/homeProdList').then((res) => {
+        this.products = res.data
       })
     }
   },
   mounted () {
     this.getHomeData()
+    this.$store.commit('CHANGE_TAB', 'icon-shouyefill')
   }
 }
 </script>

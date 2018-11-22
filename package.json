@@ -9,14 +9,16 @@
     "start": "npm run dev",
     "lint": "eslint --ext .js,.vue src",
     "build": "node build/build.js",
-    "mock": "json-server --watch --config mock-server/config.json mock-server/db.js"
+    "mock": "json-server --watch --config mock-server/config.json mock-server/db.json",
+    "data": "node mock-server/merge.js"
   },
   "dependencies": {
     "axios": "^0.18.0",
     "vue": "^2.5.2",
     "vue-awesome-swiper": "^3.1.3",
     "vue-lazyload": "^1.2.6",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

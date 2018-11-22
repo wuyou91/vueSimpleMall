@@ -81,13 +81,13 @@ export default {
       this.tap = b
     },
     getDetailData () {
-      axios.get(`http://10.10.3.58:8085/pageDetail?id=${this.$route.query.pid}`).then((r) => {
-        this.detail = r.data[0]
+      axios.get(`http://10.10.3.58:8085/prodDetailList/${this.$route.params.id}`).then((r) => {
+        this.detail = r.data
       })
     }
 
   },
-  mounted () {
+  created () {
     this.getDetailData()
   }
 }

@@ -1,8 +1,8 @@
 <template>
-  <div id="foot">
+  <div id="tab-bar">
     <ul>
       <li v-for="item in nav"
-      @click="changeRouter(item.router)"
+      @click="tab(item)"
       :key="item.router"
       :class="{active: item.activeClass === footNavActiveClass}">
         <i class="iconfont"
@@ -16,10 +16,7 @@
 
 <script>
 export default {
-  name: 'Foot',
-  props: {
-    footNavActiveClass: String
-  },
+  name: 'TabBar',
   data () {
     return {
       isLogin: false,
@@ -29,19 +26,23 @@ export default {
         {navTitle: '购物车', primClass: 'icon-gouwuche', activeClass: 'icon-gouwuchefill', router: 'car'},
         {navTitle: '我的', primClass: 'icon-yonghu', activeClass: 'icon-yonghufill', router: 'user'}
       ]
-      // selectedRouter: 'home'
     }
   },
   methods: {
-    changeRouter (router) {
-      this.$router.push(router)
+    tab (item) {
+      this.$router.push(item.router)
+    }
+  },
+  computed: {
+    footNavActiveClass () {
+      return this.$store.state.tabed
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-#foot{
+#tab-bar{
   position: fixed;
   bottom: 0;
   left: 0;
