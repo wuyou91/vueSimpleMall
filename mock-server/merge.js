@@ -10,7 +10,9 @@ const file = [
 main(file)
 
 async function main (arr) {
-  let data = {}
+  let data = {
+    user: []
+  }
   for (var item of arr) {
     let itemData = require(item) // 读取文件数据
     Object.assign(data, itemData) // 合并到data

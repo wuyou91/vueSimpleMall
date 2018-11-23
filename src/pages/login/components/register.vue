@@ -36,6 +36,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'register',
   data () {
@@ -75,8 +77,7 @@ export default {
         this.tipsText.repassword = '两次输入的密码不一致'
       } else {
         this.tipsText = {}
-        let val = JSON.stringify(this.formData) // 将用户数据转为json字符串
-        sessionStorage.setItem('userData', val) // 存入sessionStorage
+        axios.post('http://10.10.3.58:8085/user', this.formData)
         this.registerSucceeded = true
       }
     }

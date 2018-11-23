@@ -1,4 +1,12 @@
 {
+  "user": [
+    {
+      "name": "乌酉",
+      "password": "123456",
+      "repassword": "123456",
+      "id": 1
+    }
+  ],
   "homeBanner": [
     "https://yanxuan.nosdn.127.net/4c66fd0bac10880754d8cf5303ea6052.jpg",
     "https://yanxuan.nosdn.127.net/81fbc9d8ceec947f6e2ddc4cbb38997c.jpg",

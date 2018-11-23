@@ -16,6 +16,11 @@ export default {
       hasLogined: false
     }
   },
+  computed: {
+    userInfo () {
+      return this.$store.state.userInfo
+    }
+  },
   methods: {
     check () {
       if (sessionStorage.getItem('hasLogin') && sessionStorage.getItem('hasLogin') === '1') {
@@ -29,7 +34,8 @@ export default {
         } else {
           text = '晚上好'
         }
-        this.hello = JSON.parse(sessionStorage.getItem('userData')).name + '，' + text + '！'
+        console.log(this.userInfo.name)
+        this.hello = this.userInfo.name + '，' + text + '！'
       }
     },
     signOut () {

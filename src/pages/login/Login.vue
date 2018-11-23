@@ -35,19 +35,41 @@ export default {
   },
   methods: {
     logIn () {
-      let userData = JSON.parse(sessionStorage.getItem('userData'))
-      if (userData === null || this.formData.name !== userData.name) {
-        this.tips = {}
-        this.tips.name = '用户名不存在'
-      } else if (this.formData.password !== userData.password) {
-        this.tips = {}
-        this.tips.password = '密码与用户名不匹配'
+      let zw = /^[\u4E00-\u9FA5]{1,5}$/ // 判定是否为5字内中文
+      if (zw.test(this.formData.name) && this.formData.password !== '') {
+        (async () => {
+          let tip = await this.$store.dispatch('submit', this.formData)
+          switch (tip) {
+            case 0:
+              this.tips = {}
+              this.tips.name = '用户不存在'
+              break
+            case 1:
+              this.tips = {}
+              this.tips.password = '密码与用户名不匹配'
+              break
+            default:
+              sessionStorage.setItem('hasLogin', '1')
+              this.$router.go(-1)
+              break
+          }
+        })()
       } else {
-        this.tips = {}
-        sessionStorage.setItem('hasLogin', '1')
-        // this.$router.push('/user')
-        this.$router.go(-1)
+        this.tips.name = '用户名错误或未输入密码'
       }
+      // let userData = JSON.parse(sessionStorage.getItem('userData'))
+      // if (userData === null || this.formData.name !== userData.name) {
+      //   this.tips = {}
+      //   this.tips.name = '用户名不存在'
+      // } else if (this.formData.password !== userData.password) {
+      //   this.tips = {}
+      //   this.tips.password = '密码与用户名不匹配'
+      // } else {
+      //   this.tips = {}
+      //   sessionStorage.setItem('hasLogin', '1')
+      //   // this.$router.push('/user')
+      //   this.$router.go(-1)
+      // }
     }
   }
 }
