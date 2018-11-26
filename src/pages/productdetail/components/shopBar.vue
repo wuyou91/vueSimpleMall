@@ -5,7 +5,7 @@
       <li><i class="iconfont icon-31shoucang"></i>收藏</li>
     </ul>
     <ul>
-      <li>加入购物车</li>
+      <li @click="addCart">加入购物车</li>
       <li>立即购买</li>
     </ul>
   </div>
@@ -13,7 +13,20 @@
 
 <script>
 export default {
-  name: 'shopBar'
+  name: 'shopBar',
+  props: ['prodData'],
+  methods: {
+    addCart () {
+      let prod = {
+        id: this.prodData.id,
+        name: this.prodData.name,
+        desc: this.prodData.desc,
+        price: this.prodData.price,
+        img: this.prodData.mainImg[0]
+      }
+      this.$store.dispatch('addCart', prod)
+    }
+  }
 }
 </script>
 

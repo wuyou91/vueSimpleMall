@@ -11,7 +11,8 @@ main(file)
 
 async function main (arr) {
   let data = {
-    user: []
+    user: [],
+    cart: []
   }
   for (var item of arr) {
     let itemData = require(item) // 读取文件数据

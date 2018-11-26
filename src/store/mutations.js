@@ -4,5 +4,11 @@ export default {
   },
   SAVE_USER_INFO (state, userInfo) {
     state.userInfo = userInfo
+  },
+  UPDATA_CART (state, carts) {
+    state.cart = carts
+  },
+  ADDCART (state, prodData) {
+    state.cart = prodData
   }
 }

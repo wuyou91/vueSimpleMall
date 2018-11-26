@@ -38,7 +38,7 @@ export default {
       let zw = /^[\u4E00-\u9FA5]{1,5}$/ // 判定是否为5字内中文
       if (zw.test(this.formData.name) && this.formData.password !== '') {
         (async () => {
-          let tip = await this.$store.dispatch('submit', this.formData)
+          let tip = await this.$store.dispatch('logIn', this.formData)
           switch (tip) {
             case 0:
               this.tips = {}
@@ -49,7 +49,6 @@ export default {
               this.tips.password = '密码与用户名不匹配'
               break
             default:
-              sessionStorage.setItem('hasLogin', '1')
               this.$router.go(-1)
               break
           }

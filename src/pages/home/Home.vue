@@ -38,6 +38,8 @@ export default {
   },
   mounted () {
     this.getHomeData()
+  },
+  activated () {
     this.$store.commit('CHANGE_TAB', 'icon-shouyefill')
   }
 }

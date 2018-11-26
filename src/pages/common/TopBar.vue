@@ -16,14 +16,15 @@ export default {
       hasLogined: false
     }
   },
-  computed: {
-    userInfo () {
-      return this.$store.state.userInfo
-    }
-  },
+  // computed: {
+  //   userInfo () {
+  //     return this.$store.state.userInfo
+  //   }
+  // },
   methods: {
     check () {
-      if (sessionStorage.getItem('hasLogin') && sessionStorage.getItem('hasLogin') === '1') {
+      let userInfo = JSON.parse(sessionStorage.getItem('login'))
+      if (userInfo) {
         this.hasLogined = true
         let time = new Date().getHours()
         let text = ''
@@ -34,17 +35,16 @@ export default {
         } else {
           text = '晚上好'
         }
-        console.log(this.userInfo.name)
-        this.hello = this.userInfo.name + '，' + text + '！'
+        this.hello = userInfo.name + '，' + text + '！'
       }
     },
     signOut () {
-      sessionStorage.setItem('hasLogin', '0')
+      sessionStorage.removeItem('login')
       this.hasLogined = false
       this.hello = '还未登录，'
     }
   },
-  mounted () {
+  activated () {
     this.check()
   }
 }

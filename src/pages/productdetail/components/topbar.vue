@@ -5,6 +5,7 @@
     </div>
     <div class="cart" @click="goCart">
       <i class="iconfont icon-gouwuche"></i>
+      <span v-show="carsNum">{{carsNum}}</span>
     </div>
   </div>
 </template>
@@ -15,6 +16,11 @@ export default {
   data () {
     return {
       topBarStyle: 'black'
+    }
+  },
+  computed: {
+    carsNum () {
+      return this.$store.state.cart.length
     }
   },
   mounted () {
@@ -56,6 +62,19 @@ export default {
       }
       &.cart{
         float: right;
+        position: relative;
+        span{
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 18px;
+          height: 18px;
+          border-radius: 50%;
+          background: red;
+          font-size: 12px;
+          line-height: 18px;
+          color: #fff;
+        }
       }
     }
     i{

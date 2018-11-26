@@ -1,7 +1,7 @@
 <template>
   <div class="product-detail">
     <top-bar></top-bar>
-    <shop-bar></shop-bar>
+    <shop-bar :prodData = "detail"></shop-bar>
     <div class="detail-gallery">
       <swiper :options="swiperOption">
         <swiper-slide v-for="(item,index) in detail.mainImg" :key="index">
@@ -85,10 +85,16 @@ export default {
         this.detail = r.data
       })
     }
-
   },
   created () {
     this.getDetailData()
+  },
+  activated () {
+    // 根据用户ID获取购物车信息
+    if (sessionStorage.getItem('login')) {
+      let userId = JSON.parse(sessionStorage.getItem('login')).id
+      this.$store.dispatch('getCartInfo', userId)
+    }
   }
 }
 </script>

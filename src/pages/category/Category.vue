@@ -225,7 +225,7 @@ export default {
       this.isTab = index
     }
   },
-  mounted () {
+  activated () {
     this.$store.commit('CHANGE_TAB', 'icon-leimu')
   }
 }

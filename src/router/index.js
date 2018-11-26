@@ -48,7 +48,7 @@ const router = new Router({
       name: 'Car',
       component: Car,
       beforeEnter: (to, from, next) => {
-        if (sessionStorage.getItem('hasLogin') === '1') {
+        if (sessionStorage.getItem('login')) {
           next()
         } else {
           router.push({name: 'Login'})
@@ -60,7 +60,7 @@ const router = new Router({
       name: 'User',
       component: User,
       beforeEnter: (to, from, next) => {
-        if (sessionStorage.getItem('hasLogin') === '1') {
+        if (sessionStorage.getItem('login')) {
           next()
         } else {
           router.push({name: 'Login'})
@@ -82,7 +82,7 @@ const router = new Router({
       name: 'register',
       component: register,
       beforeEnter: (to, from, next) => {
-        if (sessionStorage.getItem('hasLogin') === '1') {
+        if (sessionStorage.getItem('login')) {
           router.push({name: 'Home'})
         } else {
           next()
