@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import topBar from '@/pages/common/TopBar'
+import topBar from './components/TopBar'
 import banner from './components/banner'
 import products from './components/products'
 import axios from 'axios'

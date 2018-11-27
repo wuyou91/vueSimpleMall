@@ -1,65 +1,39 @@
 <template>
-  <div id="top-bar">
-    <div class="hello">
-      {{hello}}<router-link to="/login" v-if= "!hasLogined" class="go-login">去登录</router-link>
-      <span v-if="hasLogined" @click="signOut">退出</span>
+  <div id="top-bar" :class="topBarStyle">
+    <div class="back" @click="goBack">
+      <i class="iconfont icon-fanhui1"></i>
     </div>
   </div>
 </template>
-
 <script>
 export default {
   name: 'TopBar',
-  data () {
-    return {
-      hello: '还未登录，',
-      hasLogined: false
-    }
-  },
-  // computed: {
-  //   userInfo () {
-  //     return this.$store.state.userInfo
-  //   }
-  // },
   methods: {
-    check () {
-      let userInfo = JSON.parse(sessionStorage.getItem('login'))
-      if (userInfo) {
-        this.hasLogined = true
-        let time = new Date().getHours()
-        let text = ''
-        if (time > 4 && time <= 11) {
-          text = '上午好！'
-        } else if (time > 11 && time <= 18) {
-          text = '下午好'
-        } else {
-          text = '晚上好'
-        }
-        this.hello = userInfo.name + '，' + text + '！'
-      }
-    },
-    signOut () {
-      sessionStorage.removeItem('login')
-      this.hasLogined = false
-      this.hello = '还未登录，'
+    goBack () {
+      this.$router.back(-1)
     }
-  },
-  activated () {
-    this.check()
   }
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang='scss' scoped>
   #top-bar{
-    height: .5rem;
-    line-height: .5rem;
-    text-align: right;
-    padding: 0 .2rem;
-    color: $text-color;
-    font-size: .24rem;
-    .go-login{
-      color: $blue;
+    position: fixed;
+    top:0;
+    left: 0;
+    right: 0;
+    height: 1rem;
+    z-index: 999;
+    background: rgba(0,0,0,.2);
+    .back{
+      width: 1rem;
+      height: 1rem;
+      line-height: 1rem;
+      text-align: center;
+    }
+    i{
+      font-size: .4rem;
+      color: #fff;
     }
   }
 </style>

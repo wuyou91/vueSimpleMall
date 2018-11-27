@@ -67,12 +67,12 @@ export default {
           position: absolute;
           top: 0;
           right: 0;
-          width: 18px;
-          height: 18px;
+          width: .36rem;
+          height: .36rem;
           border-radius: 50%;
           background: red;
-          font-size: 12px;
-          line-height: 18px;
+          font-size: .24rem;
+          line-height: .36rem;
           color: #fff;
         }
       }

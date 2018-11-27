@@ -7,7 +7,7 @@
     </div>
     <div class="list">
       <ul>
-        <li><i class="iconfont icon-gouwuche"></i>购物车({{carsNum}})</li>
+        <li @click="goCart"><i class="iconfont icon-gouwuche"></i>购物车({{carsNum}})</li>
         <li><i class="iconfont icon-31shoucang"></i>收藏</li>
         <li><i class="iconfont icon-leimu"></i>其他</li>
       </ul>
@@ -37,6 +37,11 @@ export default {
   },
   activated () {
     this.$store.commit('CHANGE_TAB', 'icon-yonghufill')
+  },
+  methods: {
+    goCart () {
+      this.$router.push('/car')
+    }
   }
 }
 </script>

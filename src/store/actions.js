@@ -50,5 +50,16 @@ export default {
       }
       axios.post('http://10.10.3.58:8085/cart', cart)
     })
+  },
+  // 从购物车删除商品
+  delProd (context, index) {
+    let nCart = context.state.cart
+    nCart.splice(index, 1) // 删除特定的项
+    context.commit('ADDCART', nCart) // 更新store内的数据
+    let data = {
+      carts: nCart
+    }
+    let userId = JSON.parse(sessionStorage.getItem('login')).id
+    axios.put(`http://10.10.3.58:8085/cart/${userId}`, data) // 更新服务器上的数据
   }
 }

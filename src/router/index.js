@@ -2,22 +2,6 @@ import Vue from 'vue'
 import Router from 'vue-router'
 Vue.use(Router)
 
-// const Home = resolve => require(['@/pages/home/Home'], resolve)
-// const Category = resolve => require(['@/pages/category/Category'], resolve)
-// const Car = resolve => require(['@/pages/car/Car'], resolve)
-// const User = resolve => require(['@/pages/user/User'], resolve)
-// const Login = resolve => require(['@/pages/login/Login'], resolve)
-// const ProductDetail = resolve => require(['@/pages/productdetail/ProductDetail'], resolve)
-// const register = resolve => require(['@/pages/login/components/register'], resolve)
-
-// const Home = r => require.ensure([], () => r(require('@/pages/home/Home')), 'Home')
-// const Category = r => require.ensure([], () => r(require('@/pages/category/Category')), 'Category')
-// const Car = r => require.ensure([], () => r(require('@/pages/car/Car')), 'Car')
-// const User = r => require.ensure([], () => r(require('@/pages/user/User')), 'User')
-// const Login = r => require.ensure([], () => r(require('@/pages/login/Login')), 'Login')
-// const ProductDetail = r => require.ensure([], () => r(require('@/pages/productdetail/ProductDetail')), 'ProductDetail')
-// const register = r => require.ensure([], () => r(require('@/pages/login/components/register')), 'register')
-
 const Home = () => import('@/pages/home/Home')
 const Category = () => import('@/pages/category/Category')
 const Car = () => import('@/pages/car/Car')
@@ -36,17 +20,26 @@ const router = new Router({
     {
       path: '/home',
       name: 'Home',
-      component: Home
+      component: Home,
+      meta: {
+        keepAlive: true
+      }
     },
     {
       path: '/category',
       name: 'Category',
-      component: Category
+      component: Category,
+      meta: {
+        keepAlive: true
+      }
     },
     {
       path: '/car',
       name: 'Car',
       component: Car,
+      meta: {
+        keepAlive: true
+      },
       beforeEnter: (to, from, next) => {
         if (sessionStorage.getItem('login')) {
           next()
@@ -59,6 +52,9 @@ const router = new Router({
       path: '/user',
       name: 'User',
       component: User,
+      meta: {
+        keepAlive: true
+      },
       beforeEnter: (to, from, next) => {
         if (sessionStorage.getItem('login')) {
           next()
@@ -70,17 +66,26 @@ const router = new Router({
     {
       path: '/login',
       name: 'Login',
-      component: Login
+      component: Login,
+      meta: {
+        keepAlive: true
+      }
     },
     {
       path: '/productdetail/:id',
       name: 'ProductDetail',
-      component: ProductDetail
+      component: ProductDetail,
+      meta: {
+        keepAlive: false
+      }
     },
     {
       path: '/register',
       name: 'register',
       component: register,
+      meta: {
+        keepAlive: true
+      },
       beforeEnter: (to, from, next) => {
         if (sessionStorage.getItem('login')) {
           router.push({name: 'Home'})
