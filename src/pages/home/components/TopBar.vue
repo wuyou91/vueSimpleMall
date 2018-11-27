@@ -40,6 +40,7 @@ export default {
     },
     signOut () {
       sessionStorage.removeItem('login')
+      this.$store.dispatch('delCart')
       this.hasLogined = false
       this.hello = '还未登录，'
     }

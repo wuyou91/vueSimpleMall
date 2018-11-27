@@ -68,7 +68,7 @@ const router = new Router({
       name: 'Login',
       component: Login,
       meta: {
-        keepAlive: true
+        keepAlive: false
       }
     },
     {

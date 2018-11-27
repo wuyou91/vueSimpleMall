@@ -10,5 +10,8 @@ export default {
   },
   ADDCART (state, prodData) {
     state.cart = prodData
+  },
+  DELETE_CART (state) {
+    state.cart = []
   }
 }

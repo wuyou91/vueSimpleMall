@@ -41,6 +41,11 @@ export default {
   },
   activated () {
     this.$store.commit('CHANGE_TAB', 'icon-shouyefill')
+    // 根据用户ID获取购物车信息
+    if (sessionStorage.getItem('login')) {
+      let userId = JSON.parse(sessionStorage.getItem('login')).id
+      this.$store.dispatch('getCartInfo', userId)
+    }
   }
 }
 </script>

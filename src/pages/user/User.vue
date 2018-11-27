@@ -28,7 +28,7 @@ export default {
       return this.$store.state.cart.length
     }
   },
-  mounted () {
+  created () {
     // 根据用户ID获取购物车信息
     if (sessionStorage.getItem('login')) {
       let userId = JSON.parse(sessionStorage.getItem('login')).id

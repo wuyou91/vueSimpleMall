@@ -61,5 +61,8 @@ export default {
     }
     let userId = JSON.parse(sessionStorage.getItem('login')).id
     axios.put(`http://10.10.3.58:8085/cart/${userId}`, data) // 更新服务器上的数据
+  },
+  delCart ({commit}) {
+    commit('DELETE_CART')
   }
 }

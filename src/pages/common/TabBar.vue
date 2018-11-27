@@ -8,6 +8,7 @@
         <i class="iconfont"
         :class="item.activeClass === footNavActiveClass ? item.activeClass : item.primClass"
         ></i>
+        <span v-show="carsNum" v-if ="item.messageHint">{{carsNum}}</span>
         <div>{{item.navTitle}}</div>
       </li>
     </ul>
@@ -23,7 +24,7 @@ export default {
       nav: [
         {navTitle: '首页', primClass: 'icon-shouye', activeClass: 'icon-shouyefill', router: 'home'},
         {navTitle: '分类', primClass: 'icon-leimu', activeClass: 'icon-leimu', router: 'category'},
-        {navTitle: '购物车', primClass: 'icon-gouwuche', activeClass: 'icon-gouwuchefill', router: 'car'},
+        {navTitle: '购物车', primClass: 'icon-gouwuche', activeClass: 'icon-gouwuchefill', router: 'car', messageHint: true},
         {navTitle: '我的', primClass: 'icon-yonghu', activeClass: 'icon-yonghufill', router: 'user'}
       ]
     }
@@ -36,6 +37,9 @@ export default {
   computed: {
     footNavActiveClass () {
       return this.$store.state.tabed
+    },
+    carsNum () {
+      return this.$store.state.cart.length
     }
   }
 }
@@ -50,7 +54,6 @@ export default {
   width:100%;
   background: #fff;
   box-shadow: 0 -1px 4px 0 rgba(0, 0, 0, .2);
-
   ul{
     padding: 0.05rem 0;
     display: flex;
@@ -58,6 +61,19 @@ export default {
     color: $title_color;
     li{
       text-align: center;
+      position: relative;
+      span{
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: .36rem;
+        height: .36rem;
+        border-radius: 50%;
+        background: red;
+        font-size: .24rem;
+        line-height: .36rem;
+        color: #fff;
+      }
       &.active{
         color: #0067b1;
       }
