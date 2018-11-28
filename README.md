@@ -6,14 +6,6 @@
 node爬取的网易严选的数码产品分类下的数据，没有把图片下载下来，直接使用的是网易严选的图片，若其删除则会造成无法获取到对应的图片。
 mock-server/data文件夹下用来存放各类元数据,通过运行merge.js将数据合并到db.json内，作为服务数据。
 
-## 登录与注册
-登录与注册采用sessionStorage存储用户信息，验证时直接从sessionStorage取出数据验证。
-~~~
-sessionStorage.setItem('userData', userinfo) // 储存用户注册信息
-
-sessionStorage.setItem('hasLogin', '1') // 登录设置为'1'，退出登录设置为'0'
-~~~
-
 ## 用到的插件及工具
 * 后台数据模拟[json-server](https://github.com/typicode/json-server)
 * 造假数据[mock.js](https://github.com/nuysoft/Mock/tree/refactoring)
