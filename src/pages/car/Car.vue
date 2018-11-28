@@ -14,23 +14,26 @@
     </div>
     <ul>
       <li v-for="(item, index) of carts" :key='index'>
-        <div class="check-box" @click="checkSwitch($event)">
-          <i class="iconfont icon-weixuanzhongyuanquan"></i>
-        </div>
+        <i class="check-box iconfont icon-weixuanzhongyuanquan"
+        :class = "{'icon-31xuanzhong': hasCheckAll}"
+        @click="checkSwitch($event,item)"
+        v-show="showDone"></i>
         <img :src="item.img">
         <div class="info">
           <div class="title">{{item.name}}</div>
           <div class='desc'>
             <div class="price">￥{{item.price}}</div>
-            <div class="del" @click= "delProd(index)">删除</div>
+            <div class="del" @click="deletProd(index)">删除</div>
           </div>
         </div>
       </li>
     </ul>
-    <p class="bg_bottom">已经到底部了</p>
+    <div class="bg_bottom" v-show="carts.length>4">已经到底部了</div>
     <div class="delete-bar" v-show="showDone">
-      <div class="check-all"><i class=" iconfont icon-weixuanzhongyuanquan"></i>全选</div>
-      <div class="delete-batch"><i class="iconfont icon-delete"></i>删除</div>
+      <div class="check-all"><i class="iconfont icon-weixuanzhongyuanquan"  @click="checkAll"></i>全选</div>
+      <div class="delete-batch"
+      :class = "{'readyDelete': readyToDelateProduct.length}"
+      @click="deleteProductBatch()"><i class="iconfont icon-delete"></i>删除已选</div>
     </div>
   </div>
 </template>
@@ -40,7 +43,9 @@ export default {
   name: 'Car',
   data () {
     return {
-      showDone: false
+      showDone: false,
+      hasCheckAll: false,
+      readyToDelateProduct: []
     }
   },
   computed: {
@@ -59,8 +64,8 @@ export default {
     this.$store.commit('CHANGE_TAB', 'icon-gouwuchefill')
   },
   methods: {
-    delProd (index) {
-      this.$store.dispatch('delProd', index)
+    deletProd (index) {
+      this.$store.dispatch('deletProd', index)
     },
     goBack () {
       this.$router.back(-1)
@@ -68,16 +73,38 @@ export default {
     changeControl () {
       this.showDone = !this.showDone
     },
-    checkSwitch(event) {
+    checkSwitch (event, prod) {
       let checkClass = event.target.classList
-      checkClass.contains('icon-31xuanzhong') ? checkClass.remove('icon-31xuanzhong') : checkClass.add('icon-31xuanzhong')
+      if (checkClass.contains('icon-31xuanzhong')) {
+        this._.pull(this.readyToDelateProduct, prod)
+        checkClass.remove('icon-31xuanzhong')
+      } else {
+        this.readyToDelateProduct.push(prod)
+        checkClass.add('icon-31xuanzhong')
+      }
+    },
+    deleteProductBatch () {
+      if (this.readyToDelateProduct.length) {
+        this.$store.dispatch('deletProductBatch', this.readyToDelateProduct)
+      }
+    },
+    checkAll (event) {
+      if (this.hasCheckAll) {
+        this.readyToDelateProduct = []
+        this.hasCheckAll = false
+        event.target.classList.remove('icon-31xuanzhong')
+      } else {
+        this.readyToDelateProduct = [...this.carts]
+        this.hasCheckAll = true
+        event.target.classList.add('icon-31xuanzhong')
+      }
     }
   }
 }
 </script>
 <style lang="scss" scoped>
 #car{
-  padding: 1.1rem 0 1.2rem 0;
+  padding: 1.1rem 0 0 0;
   background: $main-bg-color;
   position: relative;
   .bg{
@@ -96,7 +123,9 @@ export default {
     text-align: center;
     font-size: .28rem;
     color: $text-color;
-    line-height: .5rem;
+    width: 100%;
+    padding-bottom: .3rem;
+    margin-bottom: .8rem;
   }
 }
   li{
@@ -105,11 +134,10 @@ export default {
     margin: .2rem 0;
     width: 100%;
     display: flex;
+    color: #888;
     .check-box{
-      width: .36rem;
-      height: .36rem;
-      margin: .63rem 0 .62rem .1rem;
-      margin-right: .1rem;
+      font-size: .48rem;
+      margin: .7rem 0 .5rem .1rem;
     }
     img{
       width: 2rem;
@@ -177,17 +205,24 @@ export default {
     width: 100%;
     padding: .3rem .4rem .3rem .1rem;;
     background: #fff;
+    color: #888;
     .check-all{
       float: left;
-      font-size: .32rem;
+      font-size: .36rem;
+      i{
+        font-size: .42rem;
+         margin-right: .1rem;
+      }
     }
     .delete-batch{
       float: right;
-      color: #ff1942;
       i{
-        font-size: .4rem;
+        font-size: .42rem;
         margin-right: .1rem;
       }
+    }
+    .readyDelete{
+      color: #ff1942;
     }
   }
   .icon-31xuanzhong{

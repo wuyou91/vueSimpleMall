@@ -1,5 +1,5 @@
 import axios from 'axios'
-
+import _ from 'lodash'
 export default {
   // 登录
   logIn ({commit}, userData) {
@@ -35,7 +35,7 @@ export default {
     let nCart = context.state.cart
     nCart.push(prodData)
     // 更新store内的购物车信息
-    context.commit('ADDCART', nCart)
+    context.commit('UPDATA_CART', nCart)
     let data = {
       carts: nCart
     }
@@ -52,16 +52,28 @@ export default {
     })
   },
   // 从购物车删除商品
-  delProd (context, index) {
-    let nCart = context.state.cart
+  deletProd (context, index) {
+    let nCart = [...context.state.cart]
     nCart.splice(index, 1) // 删除特定的项
-    context.commit('ADDCART', nCart) // 更新store内的数据
+    context.commit('UPDATA_CART', nCart) // 更新store内的数据
     let data = {
       carts: nCart
     }
     let userId = JSON.parse(sessionStorage.getItem('login')).id
     axios.put(`http://10.10.3.58:8085/cart/${userId}`, data) // 更新服务器上的数据
   },
+  // 批量删除商品
+  deletProductBatch (context, arr) {
+    let nCart = [...context.state.cart]
+    _.pullAll(nCart, arr) // 删除数组内的商品
+    context.commit('UPDATA_CART', nCart) // 更新store内的数据
+    let data = {
+      carts: nCart
+    }
+    let userId = JSON.parse(sessionStorage.getItem('login')).id
+    axios.put(`http://10.10.3.58:8085/cart/${userId}`, data) // 更新服务器上的数据
+  },
+  // 退出登录时清空store中的购物车缓存
   delCart ({commit}) {
     commit('DELETE_CART')
   }

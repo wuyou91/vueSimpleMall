@@ -8,9 +8,6 @@ export default {
   UPDATA_CART (state, carts) {
     state.cart = carts
   },
-  ADDCART (state, prodData) {
-    state.cart = prodData
-  },
   DELETE_CART (state) {
     state.cart = []
   }

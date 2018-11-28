@@ -4,6 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import store from './store'
+import _ from 'lodash'
 import './assets/iconfont/iconfont.css' // 引入iconfont
 import VueLazyload from 'vue-lazyload' // 图片懒加载
 import './assets/style/common.scss'
@@ -12,6 +13,7 @@ import VueAwesomeSwiper from 'vue-awesome-swiper' // swiper插件
 import 'swiper/dist/css/swiper.css' // swiper依赖样式
 import './../static/lib/setFontSize.js' // 动态设置html标签的font-size
 
+Vue.prototype._ = _
 Vue.use(VueLazyload)
 Vue.use(VueAwesomeSwiper)
 Vue.config.productionTip = false
