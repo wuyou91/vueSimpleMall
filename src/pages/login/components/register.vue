@@ -36,7 +36,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 
 export default {
   name: 'register',
@@ -77,7 +76,7 @@ export default {
         this.tipsText.repassword = '两次输入的密码不一致'
       } else {
         this.tipsText = {}
-        axios.post('http://10.10.3.58:8085/user', this.formData)
+        this.$http.post('/user', this.formData)
         this.registerSucceeded = true
       }
     }

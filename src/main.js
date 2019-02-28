@@ -4,6 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import store from './store'
+import axios from 'axios'
 import _ from 'lodash'
 import './assets/iconfont/iconfont.css' // 引入iconfont
 import VueLazyload from 'vue-lazyload' // 图片懒加载
@@ -17,6 +18,11 @@ Vue.prototype._ = _
 Vue.use(VueLazyload)
 Vue.use(VueAwesomeSwiper)
 Vue.config.productionTip = false
+
+const host = process.env.NODE_ENV === 'production' ? '' : 'http://10.10.60.65:8085'
+Vue.prototype.$http = axios.create({
+  baseURL: host
+})
 
 router.beforeEach((to, from, next) => {
   let path = to.path

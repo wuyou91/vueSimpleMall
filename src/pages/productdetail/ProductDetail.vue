@@ -54,7 +54,6 @@
 <script>
 import shopBar from './components/shopBar'
 import topBar from './components/topbar'
-import axios from 'axios'
 export default {
   name: 'ProductDetail',
   components: {
@@ -81,7 +80,7 @@ export default {
       this.tap = b
     },
     getDetailData () {
-      axios.get(`http://10.10.3.58:8085/prodDetailList/${this.$route.params.id}`).then((r) => {
+      this.$http.get(`/prodDetailList/${this.$route.params.id}`).then((r) => {
         this.detail = r.data
       })
     }
