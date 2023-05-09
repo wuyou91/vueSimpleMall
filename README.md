@@ -51,9 +51,11 @@ mock-server/data文件夹下用来存放各类元数据,通过运行merge.js将�
 
 * npm install 安装依赖
 
-* npm run mock 开启mock服务器
+* npm run start 开启mock服务器并运行开发环境
 
-* npm run dev 运行开发环境
+* npm run mock 单独开启mock服务器
+
+* npm run dev 单独运行开发环境
 
 * npm run build 打包生产环境文件
 
