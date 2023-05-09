@@ -1,7 +1,7 @@
 import axios from 'axios'
 import _ from 'lodash'
 
-const host = process.env.NODE_ENV === 'production' ? '' : 'http://10.10.60.65:8085'
+const host = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:8085'
 const http = axios.create({
   baseURL: host
 })

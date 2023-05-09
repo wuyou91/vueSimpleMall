@@ -19,7 +19,7 @@ Vue.use(VueLazyload)
 Vue.use(VueAwesomeSwiper)
 Vue.config.productionTip = false
 
-const host = process.env.NODE_ENV === 'production' ? '' : 'http://10.10.60.65:8085'
+const host = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:8085'
 Vue.prototype.$http = axios.create({
   baseURL: host
 })
